@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bearcat Study Buddy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    table,
+    td,
+    th {
+      border: 1px solid #ddd;
+      text-align: left;
+      border-color: red;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 50%;
+      border-color: red;
+
+    }
+
+    .table-data {
+      position: relative;
+      left: 50px;
+      top: 50px;
+
+    }
+
+    th,
+    td {
+      padding: 15px;
+    }
+
+    button {
+      background-color: brown;
+      border-color: red;
+      color: white;
+    }
+
+    .heading {
+      font-size: xx-large;
+      color: darkblue;
+    }
+
+    .table-class {
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <center>
+    <h2 class="heading"> <b>Bearcat Study Buddy</b> </h2>
+
+    <button type="button" class="button">Sign In </button><br><br>
+    <button type="button" class="button">Sign Up </button><br>
+
+    <br>
+    <br>
+    <h class="heading">Display all the users from database</h>
+    <!--====form section start====-->
+    <div class="table-data">
+      <table border="1">
+        <tr class="table-class">
+          <th>S.N</th>
+          <th>Username</th>
+          <th>Passwords</th>
+          <th>Authentication Message</th>
+        </tr>
+
+        <%
+        if(userData.length!=0){
+        var i=1;
+        userData.forEach(function(data){
+        %>
+        <tr class="table-class">
+          <td><%=i; %></td>
+          <td><%=data.username %></td>
+          <td><%=data.Password %></td>
+          <td><%=data.Message %></td>
+        </tr>
+        <%  i++; }) %>
+        <% } else{ %>
+        <tr class="table-class">
+          <td colspan="7">No Data Found</td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+  </center>
+</body>
+
+</html>
