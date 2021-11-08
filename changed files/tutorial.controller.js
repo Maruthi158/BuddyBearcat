@@ -90,3 +90,56 @@ exports.update = (req, res) => {
       });
   };
 
+// Delete a Tutorial with the specified id in the request
+exports.delete = (req, res) => {
+    const id = req.params.id;
+  
+    Tutorial.findByIdAndRemove(id)
+      .then(data => {
+        if (!data) {
+          res.status(404).send({
+            message: `Cannot delete user with id=${id}. Maybe user was not found!`
+          });
+        } else {
+          res.send({
+            message: "user was deleted successfully!"
+          });
+        }
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Could not delete user with id=" + id
+        });
+      });
+  };
+
+// Delete all Tutorials from the database.
+exports.deleteAll = (req, res) => {
+    Tutorial.deleteMany({})
+      .then(data => {
+        res.send({
+          message: `${data.deletedCount} users were deleted successfully!`
+        });
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while removing all users."
+        });
+      });
+  };
+
+// Find all published Tutorials
+exports.findAllPublished = (req, res) => {
+    Tutorial.find({ isloggedin: true })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving users."
+        });
+      });
+  };
+
